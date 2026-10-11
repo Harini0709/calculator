@@ -1,5 +1,5 @@
 a = 10
-b = 5
+b = 16
 
 print("Python Calculator")
 print("First number:", a)
