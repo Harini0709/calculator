@@ -1,13 +1,10 @@
-a=float(input("enter your first number"))
-b=float(input("enter your second number"))
-op=input("enter your operation(+,-,*,/,%):")
-if(op=="+"):
-    print("sum:", a+b)
-elif(op=="-"):
-    print("difference:", a-b)
-elif (op=="*"):
-    print("multiplication:", a*b)
-elif(op=="/"):
-    print("division:", a/b)
-elif(op=="%"):
-    print("modulo:", a%b)
+a = 10
+b = 5
+
+print("Python Calculator")
+print("First number:", a)
+print("Second number:", b)
+print("Addition:", a + b)
+print("Subtraction:", a - b)
+print("Multiplication:", a * b)
+print("Division:", a / b)
