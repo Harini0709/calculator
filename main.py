@@ -1,10 +1,41 @@
-a = 10
-b = 16
 
-print("Python Calculator")
-print("First number:", a)
-print("Second number:", b)
-print("Addition:", a + b)
-print("Subtraction:", a - b)
-print("Multiplication:", a * b)
-print("Division:", a / b)
+from flask import Flask, render_template, request, jsonify
+
+app = Flask(__name__, template_folder=".")
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+@app.route("/calculate", methods=["POST"])
+def calculate():
+    data = request.get_json()
+
+    try:
+        num1 = float(data["num1"])
+        num2 = float(data["num2"])
+        operator = data["operator"]
+
+        if operator == "+":
+            result = num1 + num2
+        elif operator == "-":
+            result = num1 - num2
+        elif operator == "*":
+            result = num1 * num2
+        elif operator == "/":
+            if num2 == 0:
+                return jsonify({"error": "Cannot divide by zero"}), 400
+            result = num1 / num2
+        else:
+            return jsonify({"error": "Invalid operator"}), 400
+
+        return jsonify({"result": result})
+
+    except (TypeError, ValueError, KeyError):
+        return jsonify({"error": "Invalid input"}), 400
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
